@@ -13,24 +13,34 @@ import android.provider.Settings;
 public class HelperService extends Service {
     private boolean isRunning = false;
 
+	/* 
+	Extremely important: a call of a static receiver increases the app priority, and a clogged queue is actually good, because as soon as all processes die, the system can revisit the broadcast queue and restart the application. The receiver is located in a separate process, so there is no need to worry that this will lead to failures in the service.
+	*/
 	private void startWatchdogThread() {
         new Thread(() -> {
             while (true) {
-                try {
-					/* 
-					Extremely important: a call of a static receiver increases the app priority, and a clogged queue is actually good, because as soon as all processes die, the system can revisit the broadcast queue and restart the application. The receiver is located in a separate process, so there is no need to worry that this will lead to failures in the service.
-					*/
-                    DestroyPanic();
-                } catch (Throwable t) {}
-                android.os.SystemClock.sleep(15000);
+                DestroyPanic();
+                android.os.SystemClock.sleep(7500);
+				DestroyPanic2();
+				android.os.SystemClock.sleep(7500);
             }
         }).start();
     }
 	
 	private void DestroyPanic() {
+		try {
 		Intent intent = new Intent(getPackageName() + ".START");
         intent.setPackage(getPackageName());            
-        sendBroadcast(intent);
+        sendOrderedBroadcast(intent, null);
+		} catch (Throwable t) {}
+	}
+
+	private void DestroyPanic2() {
+		try {
+		Intent intent2 = new Intent(getPackageName() + ".START2");
+        intent2.setPackage(getPackageName());            
+        sendOrderedBroadcast(intent2, null);
+		} catch (Throwable t2) {}
 	}
 	
     private void DestroyCleaner() {
