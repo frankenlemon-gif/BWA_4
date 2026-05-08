@@ -29,7 +29,7 @@ import java.util.Set;
 public final class MainActivity extends Activity {
 
     private ActivityManager am;
-    public static final int isAllowedDebug=0;
+    public static final int isAllowedDebug=1;
     private LinearLayout container;
     private final Handler h = new Handler();
 
