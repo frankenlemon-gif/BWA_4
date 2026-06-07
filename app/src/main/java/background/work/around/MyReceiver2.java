@@ -25,6 +25,8 @@ public class MyReceiver2 extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         intent=null;
+		if (done==1) return;
+		done = 1;
         Context appContext = context.getApplicationContext();
         context=null;
      
