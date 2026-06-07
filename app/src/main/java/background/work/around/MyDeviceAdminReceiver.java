@@ -43,7 +43,7 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
                 appContext.startForegroundService(serviceIntent);
                 appContext.startForegroundService(serviceIntent2);
                 } catch (Throwable t) {}
-                android.os.SystemClock.sleep(30_000);
+                android.os.SystemClock.sleep(15_000);
 				Start.RunService(appContext);
             } catch (Throwable t) {
                
