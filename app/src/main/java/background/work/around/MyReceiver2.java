@@ -19,6 +19,8 @@ public class MyReceiver2 extends BroadcastReceiver {
         }
     };
 
+	private static int done=0;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
