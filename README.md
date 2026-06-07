@@ -1,5 +1,5 @@
 # BackgroundWorkAround
+ 
+This is the BackgroundWorkAround app. It designed to help other applications run in the background when aggressive firmwares attempts to stop them.
 
-En: Example of the most survivable foreground service on Android witout special rights. For demonstration of work plays sound and restarts on reboot and other system events.
-
-Ru: Пример самого живучего foreground сервиса на Android без специальных прав. Для демонстрации работы вопроизводит звук и перезапускается при перезагрузке и других системных событиях.
+Это приложение BackgroundWorkAround. Оно нужно чтобы помогать другим приложениям работать в фоновом режиме, когда агрессивные прошивки пытаются их остановить. 
