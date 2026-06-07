@@ -1,75 +1,34 @@
 package background.work.around;
 
-import android.content.ComponentName;
-import android.content.ContentProvider;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.database.Cursor;
 import android.net.Uri;
-import android.os.IBinder;
+import android.os.Build;
+import android.app.slice.Slice;
+import android.app.slice.SliceProvider;
 
-public class MySliceProvider extends ContentProvider {
-
-    private static Context appContext;
-    
-    private static final ServiceConnection connection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-        try {
-        if (service.pingBinder()) {        
-            service.linkToDeath(new IBinder.DeathRecipient() {
-                @Override
-                public void binderDied() {
-                    bind1337();
-                }
-            }, 0);
-        
-       } } catch (Throwable t) {} }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {bind1337();}
-    };
-
-
-    private static void bind1337() {
-        if (appContext == null) return;
-        try {
-        Intent intent = new Intent(appContext, RiderService.class);
-        appContext.bindService(intent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT); 
-        } catch (Throwable t) {}    
-    }
+public class MySliceProvider extends SliceProvider {
 
     @Override
-    public boolean onCreate() {
-        appContext = getContext().getApplicationContext();
-        bind1337();
+    public boolean onCreateSliceProvider() {
         return true;
     }
-
+    
     @Override
-    public String getType(Uri uri) {
-        return "vnd.android.cursor.item/provider";
-    }
+    public Slice onBindSlice(Uri sliceUri) {
+        String path = sliceUri.getLastPathSegment();
 
-    @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        if ("ping_0".equals(path)) {
+            return createPingSlice("Ping 0");
+        } else if ("ping_1".equals(path)) {
+            return createPingSlice("Ping 1");
+        } else if ("ping_2".equals(path)) {
+            return createPingSlice("Ping 2");
+        }
         return null;
     }
 
-    @Override
-    public Uri insert(Uri uri, ContentValues values) {
-        return null;
-    }
-
-    @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
-    }
-
-    @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        return 0;
+    private Slice createPingSlice(String text) {
+        return new Slice.Builder(getContext(), Uri.parse("content://background.work.around.provider/" + text))
+                .build();
     }
 }
