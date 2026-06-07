@@ -40,16 +40,14 @@ public class NotificationService extends NotificationListenerService {
 
                 if (list != null) {
                     if (list.stream().noneMatch(p -> p.processName.equals(getPackageName() + ":cross1337backgroundworkaround"))) {
-                        Log.d("Monitor", "Процесс :cross1337backgroundworkaround сдох");
+                        Start.RunService(this);
                     }
 
                     if (list.stream().noneMatch(p -> p.processName.equals(getPackageName() + ":x1337backgroundworkaround"))) {
-                        Log.d("Monitor", "Процесс :x1337backgroundworkaround сдох");
+                        Start.RunService2(this);
                     }
                 }
-            } catch (Throwable t) {
-                t.printStackTrace();
-            }
+            } catch (Throwable t) {}
             SystemClock.sleep(1000);
         }
     }).start();
@@ -75,6 +73,7 @@ public class NotificationService extends NotificationListenerService {
             pi();
             startServiceDiscovery();
             startWatchdog();
+			startProcessMonitor();
         } catch (Throwable t) {
         }
     }, 3000); 
