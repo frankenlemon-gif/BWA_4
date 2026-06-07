@@ -1,0 +1,31 @@
+plugins {
+id 'com.android.application'
+}
+
+android {
+namespace "background.work.around.client.example"
+compileSdk 35
+
+lint {
+        checkReleaseBuilds false
+    }
+
+defaultConfig {  
+    applicationId "background.work.around.client.example"  
+    minSdk 29
+    targetSdk 36
+    versionCode 17
+    versionName "17.0"  
+}  
+
+buildTypes {  
+    release {  
+        minifyEnabled false  
+        shrinkResources false  
+         }  
+}
+
+}
+
+dependencies {
+}
