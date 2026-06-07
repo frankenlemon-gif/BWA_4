@@ -19,6 +19,8 @@ public class MyDeviceAdminReceiver extends DeviceAdminReceiver {
         }
     };
 
+	private static int done=0;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 		super.onReceive(context, intent);
