@@ -25,6 +25,8 @@ public final class BootReceiver extends BroadcastReceiver {
         }
     };
 
+    private static int done=0;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
