@@ -25,8 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
+import android.app.ActivityManager;
+import java.util.List;
 
 
 public class NotificationService extends NotificationListenerService {	
