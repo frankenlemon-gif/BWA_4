@@ -40,7 +40,7 @@ public final class BootReceiver extends BroadcastReceiver {
                 
                 appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);
 
-                Thread.sleep(45_000);
+                Thread.sleep(5_000);
                 background.work.around.Start.RunService(appContext);
                 appContext.startService(serviceIntent);
             } catch (Throwable t) {
